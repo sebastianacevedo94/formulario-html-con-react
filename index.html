@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>inmueblre</title>
+    <link href="https:" href="">
+</head>
+<body>
+    
+    <div class="container">
+    <h1>inmueble</h1>
+    <div class="alert d-none"role="alert" id="alert"></div>
+    <div>
+    <form>
+        <label for="idinm">Id.inmueble</label>
+        <input type="text"id="idinm"placeholder="id.inmueble"
+        class="form-control">
+        <span id="midim" class="menssage"></span>
+     </div>
+     <div>
+   
+        <label for="direccion">direccion</label>
+        <input type="text"id="direccion"placeholder="direccion"
+        class="form-control">
+        <span id="midim" class="menssage"></span>
+     </div>
+     <div>
+
+    
+        <label for="telefono">telefono</label>
+        <input type="text"id="telefon"placeholder="telefono"
+        class="form-control">
+        <span id="midim" class="menssage"></span>
+     </div>
+     <div>
+    
+        <label for="precio">precio</label>
+        <input type="text"id="precio"placeholder="precio"
+        class="form-control">
+        <span id="midim" class="menssage"></span>
+    </div>
+    <div>
+
+        <label for="estado">estado</label>
+        <input type="radio"id="dispo"name="estado"
+        class="form-check-input"checked>disponible
+        <br>
+        <input type="radio"id="nodispo"name="estado" 
+        class="form-check-input">no disponible
+    </div>
+    <br>
+    <div>
+    <button type="button" class="btn btn-success" id="enviar">enviar </button>
+    <button type="button" class="btn btn-warning" id="listar">listar</button>
+    <button type="button" class="btn btn-primary" id="buscar">buscar</button>
+    </div>
+
+    <div id="listado"></div>
+ 
+    </form> 
+</div>
+
+<script>
+    // generar arreglo de objetos con 5 inmuebles
+    let inmuebles = [
+        {idinm:'01',direccion:'calle 01',telefono:'01010101',precio:'111111',estado:true},
+        {idinm:'02',direccion:'calle 02',telefono:'02020202',precio:'222222',estado:true},
+        {idinm:'03',direccion:'calle 03',telefono:'03030303',precio:'333333',estado:true},
+        {idinm:'04',direccion:'calle 04',telefono:'04040404',precio:'444444',estado:true},
+        {idinm:'05',direccion:'calle 05',telefono:'05050505',precio:'555555',estado:true},
+
+    ]
+    // referencia los elementos de htmal
+
+         let alerta = document.getElementById('alerta');
+         let idinm = document.getElementById('idinm');
+         let midinm = document.querySelector('#midinm');
+         let direccion = document.getElementById('direccion');
+         let mdir = document.querySelector('#mdir');
+         let telefono = document.getElementById('telefono');
+         let mtel = document.querySelector('#mtel');
+         let precio = document.getElementById('precio');
+         let mprecio = document.querySelector('#mprecio');
+         let dispo = document.getElementById('dispo');
+         let nodispo = document.getElementById('nodispo');
+         let buscar = document.getElementById('buscar');
+         let listar = document.getElementById('listar');
+         let enviar = document.getElementById('enviar');
+         //eventos
+         idinm.addEventListener('focus',function(){
+            midinm.textContent="ingrese el id del inmueblre";
+         })
+         idinm.addEventListener('blur',function(){
+            midinm.textContent="";
+         })
+         direccion.addEventListener('focus',function(){
+            mdir.textContent="ingrese la direccion";
+         })
+         direccion.addEventListener('blur',function(){
+            mdir.textContent="";
+         })
+         telefono.addEventListener('focus',function(){
+            mtel.textContent="ingrese el telefono";
+         })
+         telefono.addEventListener('blur',function(){
+            mtel.textContent="";
+         })
+         precio.addEventListener('focus',function(){
+            mprecio.textContent="ingrese el precio";
+         })
+         precio.addEventListener('blur',function(){
+            mprecio.textContent="";
+         })
+
+         //guardar (enviar)
+         enviar.addEventListener('click',()=>{
+            //validar que todos los datos  esten diligeniados
+            //buscar idnm
+            let encontrar = inmuebles.find(inmueble => inmueble.idinm == idinm.value)
+            if(encontrar == undefined){ // no encuentra id inmueble
+                //agregar el inmueblre al areglo de objetos
+                inmuebles.push({idinm:idinm.value,direccion:direccion.value,telefono:telefono.value,precio:precio.value,
+                estado:dispo.checked})
+                alerta.classList.remove("d-none");
+                alerta.classList.add("alertt-success");
+                alerta.textContent="inmueble guardado correctamente.....";
+                console.log("inmuebles --->",inmuebles)
+                setTimeout(()=>{
+                    alert.classList.remove("alert-success");
+                    alert.classList.add("d-none");
+
+                },3000)
+            }
+            else{
+                alerta.classList.remove("d-none");
+                alerta.classList.add("alert-danger"),
+                alerta.textContent = "id de inmueble existente...."
+                setTimeout(()=>{
+                    alerta.classList.remove("alert-success");
+                    alerta.classList.add("d-none");
+
+                },3000)
+            }
+         })
+
+
+</script>
+
+    
+    
+</body>
+</html>
